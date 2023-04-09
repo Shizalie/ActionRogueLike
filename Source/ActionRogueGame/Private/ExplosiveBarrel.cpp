@@ -28,16 +28,6 @@ AExplosiveBarrel::AExplosiveBarrel()
 void AExplosiveBarrel::OnActorHit( UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	ForceComp->FireImpulse();
-
-	UE_LOG(LogTemp, Log, TEXT("On ActorHit in Explosive Barrel"));
-
-	// %s = string
-	// %f = float
-	// logs: "OtherActor: MyActor_1, at gametime: 124.4" 
-	UE_LOG(LogTemp, Warning, TEXT("OtherActor: %s, at the game time: %f"), *GetNameSafe(OtherActor), GetWorld()->TimeSeconds);
-
-	FString CombinedString = FString::Printf(TEXT("Hit at location: %s"), *Hit.ImpactPoint.ToString());
-	DrawDebugString(GetWorld(), Hit.ImpactPoint, CombinedString, nullptr, FColor::Green, 2.0f, true);
 }
 
 void AExplosiveBarrel::PostInitializeComponents()

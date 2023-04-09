@@ -8,6 +8,8 @@
 
 class UCameraComponent;
 class USpringArmComponent;
+class UARInteractionComponent;
+class UAnimMontage;
 
 UCLASS()
 class ACTIONROGUEGAME_API AARCharacter : public ACharacter
@@ -16,8 +18,15 @@ class ACTIONROGUEGAME_API AARCharacter : public ACharacter
 
 protected:
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Attack")
 	TSubclassOf<AActor> ProjectileClass;
+
+	UPROPERTY(EditAnywhere, Category = "Attack")
+	UAnimMontage* AttackAnim; 
+
+	FTimerHandle TimerHandle_PrimaryAttack;
+
+
 
 public:
 	// Sets default values for this character's properties
@@ -33,11 +42,16 @@ protected:
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* CameraComp;
 
+	UPROPERTY(VisibleAnywhere)
+	UARInteractionComponent* InteractionComp;
+
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 
 	void PrimaryAttack();
 
+	void PrimaryInteract();
+	void PrimaryAttack_TimeElapsed();
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
